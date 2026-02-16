@@ -1,3 +1,5 @@
+import { format, formatDistanceToNowStrict } from "date-fns";
+
 export function getRandomBg700Color() {
   const COLORS = [
     "bg-slate-700",
@@ -46,4 +48,8 @@ const removeJwtToken = () => {
 
 export const logOut = () => {
   removeJwtToken();
+};
+
+export const formatDate = (timeStamp: string) => {
+  return formatDistanceToNowStrict(new Date(timeStamp), { addSuffix: true });
 };

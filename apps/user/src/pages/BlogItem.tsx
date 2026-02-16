@@ -7,6 +7,7 @@ import Heading from "../components/Heading";
 import { AuthContext } from "../context/AuthContext";
 import MarkDown from "../components/MarkDown";
 import { BASE_API_URL } from "../config/env";
+import { formatDate } from "../utils/utils";
 
 export default function BlogItem() {
   const navigate = useNavigate();
@@ -28,7 +29,6 @@ export default function BlogItem() {
 
       const response = await fetch(`${BASE_API_URL}/blog/${id}`);
       const data = await response.json();
-      console.log(data);
       setBlog(data);
     };
 
@@ -96,7 +96,7 @@ export default function BlogItem() {
         <Heading level={1} className="mb-6 heading-b-border">
           {blog.title}
         </Heading>
-        <BlogAuthorRow user={blog.user.name} publishDate={blog.createdAt} />
+        <BlogAuthorRow user={blog.user.name} publishDate={formatDate(blog.createdAt)} />
         <MarkDown>{blog.body}</MarkDown>
         <section className="my-30">
           <Heading level={2} size="text-2xl" className="mb-6 heading-b-border">

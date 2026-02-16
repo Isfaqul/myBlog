@@ -71,4 +71,6 @@ export type LogInFormData = {
 export type AboutResponse = {
   aboutMe: string;
   aboutThisPage: string;
+  likes: string[];
+  dislikes: string[];
 };

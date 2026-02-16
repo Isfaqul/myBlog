@@ -1,5 +1,5 @@
 import type { CommentCardProps } from "../types";
-import { getRandomBg700Color } from "../utils/utils";
+import { formatDate, getRandomBg700Color } from "../utils/utils";
 
 export default function CommentCard({ comment }: CommentCardProps) {
   const randomBgColor = getRandomBg700Color();
@@ -11,7 +11,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
         <div className="flex gap-2 leading-4">
           <h3 className="text-tGray-100 font-medium">{comment.user.name}</h3>
           <p className="text-tGray-200">·</p>
-          <p className="text-tGray-200 font-light">{comment.createdAt}</p>
+          <p className="text-tGray-200 font-light">{formatDate(comment.createdAt)}</p>
         </div>
         <p className="text-tGray-100 font-light mt-1">{comment.comment}</p>
       </div>
