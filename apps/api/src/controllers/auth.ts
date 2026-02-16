@@ -7,6 +7,8 @@ import passport from "passport";
 import type { User } from "../@types/auth.js";
 import jwt from "jsonwebtoken";
 
+const JWT_SECRET = process.env.JWT_SECRET;
+
 const login = [
   validateLoginFormData,
   (req: Request, res: Response, next: NextFunction) => {
@@ -62,4 +64,29 @@ const signup = [
   },
 ];
 
-export { login, signup };
+const checkSessionValidity = async (req: Request, res: Response, next: NextFunction) => {
+  const header = req.headers.authorization;
+
+  if (!header || typeof header !== "string") {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  if (!header.startsWith("Bearer")) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const token = header.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    jwt.verify(token, JWT_SECRET);
+    return res.status(200).json({ message: "Token valid", valid: true });
+  } catch (error) {
+    return res.status(401).json({ message: "Token expired" });
+  }
+};
+
+export { login, signup, checkSessionValidity };
