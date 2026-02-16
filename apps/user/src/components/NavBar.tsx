@@ -26,18 +26,13 @@ export default function NavBar({ auth }: { auth: AuthContexType }) {
             About
           </NavLink>
         </li>
-        <li>
-          <NavLink className={({ isActive }) => (isActive ? `activeLink` : "inactiveLink")} to="/list">
-            List
-          </NavLink>
-        </li>
       </ul>
       <div className="flex items-center gap-2">
         <button className="size-8 rounded-full flex items-center justify-center bg-tGray-300 text-tGray-100 cursor-pointer">
           <MdOutlineDarkMode />
         </button>
-        {auth.isLoggedIn ? (
-          <button onClick={auth.logOut} className="px-3 py-1 rounded-md flex text-tGray-100 underline cursor-pointer">
+        {auth!.isLoggedIn ? (
+          <button onClick={auth!.logOut} className="px-3 py-1 rounded-md flex text-tGray-100 underline cursor-pointer">
             Logout
           </button>
         ) : (

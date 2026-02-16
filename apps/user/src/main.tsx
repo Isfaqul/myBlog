@@ -11,7 +11,6 @@ import SignUp from "./pages/Signup.tsx";
 import AuthLayout from "./Layouts/Auth.tsx";
 import LogIn from "./pages/Login.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
-import List from "./pages/List.tsx";
 
 const router = createBrowserRouter([
   {
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
       {
         path: "about",
         Component: About,
-      },
-      {
-        path: "list",
-        Component: List,
       },
     ],
   },

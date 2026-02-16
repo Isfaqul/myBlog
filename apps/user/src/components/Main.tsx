@@ -2,7 +2,7 @@ import { type MainProps } from "../types";
 import MainContentWrapper from "./MainContentWrapper";
 
 export default function Main({ children, className }: MainProps) {
-  const baseClasses = `bg-tGray-500 flex-1 pt-14`;
+  const baseClasses = `bg-tGray-500 flex-1 pt-14 px-3`;
 
   return (
     <main className={`${baseClasses} ${className ?? ""}`}>

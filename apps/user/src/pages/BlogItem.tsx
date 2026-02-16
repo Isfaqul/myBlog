@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router";
-import { useContext, useEffect, useState, type FormEvent } from "react";
+import { useContext, useEffect, useState, type SyntheticEvent } from "react";
 import type { BlogPost, Comment } from "../types";
 import BlogAuthorRow from "../components/BlogAuthorRow";
 import CommentCard from "../components/CommentCard";
@@ -41,7 +41,7 @@ export default function BlogItem() {
   const commentElements =
     blog.comments && blog.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />);
 
-  async function handleCommentSubmit(e: FormEvent) {
+  async function handleCommentSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!isLoggedIn) {
@@ -103,7 +103,7 @@ export default function BlogItem() {
           </Heading>
           <div>
             <div className="p-4 border border-tGray-300 rounded-md">
-              <form action="" className="font-body space-y-2" method="POST" onSubmit={handleCommentSubmit}>
+              <form className="font-body space-y-2" method="POST" onSubmit={handleCommentSubmit}>
                 <div>
                   <label htmlFor="comment" className="text-tGray-100 block mb-2">
                     Comment
@@ -113,7 +113,7 @@ export default function BlogItem() {
                     onChange={(e) => setComment(e.target.value)}
                     id="comment"
                     name="comment"
-                    className="block text-tGray-100 w-full bg-tGray-400 py-1 px-2 border rounded-sm border-tGray-300 focus:outline-tGray-100 focus:outline"
+                    className="block text-tGray-100 font-body font-light w-full bg-tGray-400 py-1 px-2 border rounded-sm border-tGray-300 focus:outline-tGray-100 focus:outline"
                     placeholder="Your thoughts here..."
                   ></textarea>
                   {commentError && <p className="font-body text-red-400 text-sm mt-1">* {commentError}</p>}
