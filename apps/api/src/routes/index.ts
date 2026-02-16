@@ -2,11 +2,13 @@ import { Router, type NextFunction, type Request, type Response } from "express"
 import blogRouter from "./blog.js";
 import authRouter from "./auth.js";
 import globalErrorHandler from "../controllers/globalErrorHandler.js";
+import contentRouter from "./content.js";
 
 const router = Router();
 
 router.use("/blog", blogRouter);
 router.use("/auth", authRouter);
+router.use("/content", contentRouter);
 
 // 404 Handler
 router.use((req: Request, res: Response, next: NextFunction) => {

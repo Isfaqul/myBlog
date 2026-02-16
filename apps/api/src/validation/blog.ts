@@ -8,7 +8,6 @@ export const validatePostBody = [
     .bail()
     .isLength({ min: 10, max: 200 })
     .withMessage("Title must be between 10-200 characters."),
-  ,
   body("body")
     .trim()
     .notEmpty()

@@ -12,6 +12,6 @@
     "esModuleInterop": true,
     "outDir": "dist"
   },
-  "include": ["src/**/*", "prisma.config.ts"],
+  "include": ["src/**/*", "prisma.config.ts", "public/**/*"],
   "exclude": ["node_modules", "dist"]
 }
