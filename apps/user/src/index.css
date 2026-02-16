@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Sora:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Sora:wght@100..800&display=swap&family=Google+Sans+Code:ital,wght@0,300..80");
 @import "tailwindcss";
 
 @theme {
   --font-heading: "Sora", sans-serif;
   --font-body: "IBM Plex Sans", sans-serif;
+  --font-code: "Google Sans Code", monospace;
 
   --color-tGray-100: #ececed;
   --color-tGray-200: #787f83;

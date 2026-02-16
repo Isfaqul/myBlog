@@ -5,6 +5,7 @@ import BlogAuthorRow from "../components/BlogAuthorRow";
 import CommentCard from "../components/CommentCard";
 import Heading from "../components/Heading";
 import { AuthContext } from "../context/AuthContext";
+import MarkDown from "../components/MarkDown";
 
 export default function BlogItem() {
   const navigate = useNavigate();
@@ -95,7 +96,7 @@ export default function BlogItem() {
           {blog.title}
         </Heading>
         <BlogAuthorRow user={blog.user.name} publishDate={blog.createdAt} />
-        <p className="font-body text-tGray-100 text-lg">{blog.body}</p>
+        <MarkDown>{blog.body}</MarkDown>
         <section className="my-30">
           <Heading level={2} size="text-2xl" className="mb-6 heading-b-border">
             Comments
