@@ -34,4 +34,5 @@ export const dislikes = [
   "Unclear Requirements",
   "Tea",
   "Notifications",
+  "Marketing Spams",
 ];

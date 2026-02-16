@@ -32,13 +32,17 @@ export default function About() {
   const likes =
     data?.likes &&
     data?.likes.map((item) => (
-      <p className="inline font-body text-green-300/70 bg-green-900/20 w-max px-2 py-1 rounded-md">{item}</p>
+      <p key={item} className="inline font-body text-green-300/70 bg-green-900/20 w-max px-2 py-1 rounded-md">
+        {item}
+      </p>
     ));
 
   const dislikes =
     data?.dislikes &&
     data?.dislikes.map((item) => (
-      <p className="inline font-body text-red-200/70 bg-red-400/20 w-max px-2 py-1 rounded-md">{item}</p>
+      <p key={item} className="inline font-body text-red-200/70 bg-red-400/20 w-max px-2 py-1 rounded-md">
+        {item}
+      </p>
     ));
 
   return (
@@ -56,16 +60,6 @@ export default function About() {
       <section className="my-8">
         <hgroup className="flex justify-between items-baseline mb-6">
           <Heading level={2} size="text-2xl" className="heading-b-border">
-            About this page
-          </Heading>
-        </hgroup>
-        <div className="">
-          <MarkDown>{data?.aboutThisPage ?? ""}</MarkDown>
-        </div>
-      </section>
-      <section className="my-8">
-        <hgroup className="flex justify-between items-baseline mb-6">
-          <Heading level={2} size="text-2xl" className="heading-b-border">
             Likes 👍
           </Heading>
         </hgroup>
@@ -78,6 +72,16 @@ export default function About() {
           </Heading>
         </hgroup>
         <div className="flex flex-wrap gap-2">{dislikes}</div>
+      </section>
+      <section className="my-8">
+        <hgroup className="flex justify-between items-baseline mb-6">
+          <Heading level={2} size="text-2xl" className="heading-b-border">
+            About this page
+          </Heading>
+        </hgroup>
+        <div className="">
+          <MarkDown>{data?.aboutThisPage ?? ""}</MarkDown>
+        </div>
       </section>
     </>
   );
