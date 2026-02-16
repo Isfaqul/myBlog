@@ -4,6 +4,7 @@ import Heading from "../components/Heading";
 import BlogCard from "../components/BlogCard";
 import type { BlogPost } from "../types";
 import { Link } from "react-router";
+import { BASE_API_URL } from "../config/env";
 
 export default function Home() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -11,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     const getBlogs = async () => {
       try {
-        const response = await fetch("http://localhost:3000/blog");
+        const response = await fetch(`${BASE_API_URL}/blog`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch data.");

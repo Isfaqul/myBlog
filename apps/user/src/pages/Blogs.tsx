@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import BlogCard from "../components/BlogCard";
 import Heading from "../components/Heading";
 import type { BlogPost } from "../types";
+import { BASE_API_URL } from "../config/env";
 
 function Blogs() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
     const getBlogs = async () => {
-      const response = await fetch(`http://localhost:3000/blog`);
+      const response = await fetch(`${BASE_API_URL}/blog`);
       const data = await response.json();
       setBlogPosts(data);
     };

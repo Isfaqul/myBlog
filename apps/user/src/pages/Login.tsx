@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import type { FormDataApiError, LogInFormData } from "../types";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-
-const URL = "http://localhost:3000/auth";
+import { BASE_API_URL } from "../config/env";
 
 export default function LogIn() {
   const auth = useContext(AuthContext);
@@ -31,7 +30,7 @@ export default function LogIn() {
 
   const onSubmit = async (data: LogInFormData) => {
     try {
-      const apiResponse = await fetch(`${URL}/login`, {
+      const apiResponse = await fetch(`${BASE_API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

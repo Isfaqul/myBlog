@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { clearToken, getToken, setToken } from "../utils/token";
+import { BASE_API_URL } from "../config/env";
 
 export default function useAuth() {
   const [accessToken, setAccessToken] = useState<string | null>(() => getToken());
@@ -13,7 +14,7 @@ export default function useAuth() {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/auth/me", {
+        const response = await fetch(`${BASE_API_URL}/auth/me`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${accessToken}`,

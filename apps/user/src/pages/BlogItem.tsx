@@ -6,6 +6,7 @@ import CommentCard from "../components/CommentCard";
 import Heading from "../components/Heading";
 import { AuthContext } from "../context/AuthContext";
 import MarkDown from "../components/MarkDown";
+import { BASE_API_URL } from "../config/env";
 
 export default function BlogItem() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function BlogItem() {
     const getBlogById = async (id: string) => {
       if (!id) return;
 
-      const response = await fetch(`http://localhost:3000/blog/${id}`);
+      const response = await fetch(`${BASE_API_URL}/blog/${id}`);
       const data = await response.json();
       console.log(data);
       setBlog(data);
@@ -55,7 +56,7 @@ export default function BlogItem() {
       return;
     }
 
-    const URL = `http://localhost:3000/blog/${blogId}/comments`;
+    const URL = `${BASE_API_URL}/blog/${blogId}/comments`;
 
     try {
       const response = await fetch(URL, {

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router";
 import Heading from "../components/Heading";
 import { useForm } from "react-hook-form";
 import type { SignUpFormData } from "../types";
+import { BASE_API_URL } from "../config/env";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function SignUp() {
     };
 
     try {
-      const apiResponse = await fetch("http://localhost:3000/auth/signup", {
+      const apiResponse = await fetch(`${BASE_API_URL}/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
