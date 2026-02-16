@@ -64,7 +64,7 @@ const signup = [
   },
 ];
 
-const checkSessionValidity = async (req: Request, res: Response, next: NextFunction) => {
+const checkSessionValidity = async (req: Request, res: Response) => {
   const header = req.headers.authorization;
 
   if (!header || typeof header !== "string") {
