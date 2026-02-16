@@ -67,3 +67,8 @@ export type LogInFormData = {
   username: string;
   password: string;
 };
+
+export type AboutResponse = {
+  aboutMe: string;
+  aboutThisPage: string;
+};
