@@ -1,25 +1,21 @@
 import { useNavigate, useParams } from "react-router";
-import { useContext, useEffect, useState, type SyntheticEvent } from "react";
+import { useEffect, useState, type SyntheticEvent } from "react";
 import type { BlogPost, Comment } from "../types";
 import BlogAuthorRow from "../components/BlogAuthorRow";
 import CommentCard from "../components/CommentCard";
 import Heading from "../components/Heading";
-import { AuthContext } from "../context/AuthContext";
 import MarkDown from "../components/MarkDown";
 import { BASE_API_URL } from "../config/env";
 import { formatDate } from "../utils/utils";
+import useAuthContext from "../hooks/useAuthContext";
 
 export default function BlogItem() {
   const navigate = useNavigate();
-  const auth = useContext(AuthContext);
+  const auth = useAuthContext();
   const { blogId } = useParams();
   const [blog, setBlog] = useState<BlogPost>();
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState<string | null>(null);
-
-  if (!auth) {
-    throw new Error("AuthContext not found");
-  }
 
   const { isLoggedIn, accessToken } = auth;
 

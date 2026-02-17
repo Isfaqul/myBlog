@@ -27,11 +27,11 @@
 }
 
 .activeLink {
-  @apply text-tGray-100 bg-amber-900 rounded-md px-4 py-2 transition-all duration-200 ease-ease hover:bg-amber-900/50;
+  @apply block w-full sm:w-max text-tGray-100 bg-amber-900 rounded-md px-4 py-3 sm:py-2 transition-all duration-200 ease-ease hover:bg-amber-900/40;
 }
 
 .inactiveLink {
-  @apply text-tGray-100 rounded-md px-4 py-2 transition-all duration-200 ease-ease hover:bg-tGray-300/50;
+  @apply block w-full sm:w-max text-tGray-100 rounded-md px-4 py-3 sm:py-2 transition-all duration-200 ease-ease hover:bg-tGray-400;
 }
 
 .heading {

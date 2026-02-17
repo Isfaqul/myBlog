@@ -22,11 +22,20 @@ export type BlogAuthorRowProps = {
 };
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
-type SizeClasses = "text-sm" | "text-md" | "text-lg" | "text-xl" | "text-2xl" | "text-3xl" | "text-4xl";
+type MobileSizeClasses = "text-sm" | "text-md" | "text-lg" | "text-xl" | "text-2xl" | "text-3xl" | "text-4xl";
+type DesktopSizeClasses =
+  | "sm:text-sm"
+  | "sm:text-md"
+  | "sm:text-lg"
+  | "sm:text-xl"
+  | "sm:text-2xl"
+  | "sm:text-3xl"
+  | "sm:text-4xl";
 
 export type HeadingProps = {
   level: HeadingLevel;
-  size?: SizeClasses;
+  size?: MobileSizeClasses;
+  desktopSize?: DesktopSizeClasses;
 } & React.ComponentPropsWithoutRef<"h1">;
 
 export type MainProps = React.ComponentPropsWithoutRef<"main">;

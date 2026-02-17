@@ -5,9 +5,11 @@ import BlogCard from "../components/BlogCard";
 import type { BlogPost } from "../types";
 import { Link } from "react-router";
 import { BASE_API_URL } from "../config/env";
+import useAuthContext from "../hooks/useAuthContext";
 
 export default function Home() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const getBlogs = async () => {
@@ -36,13 +38,13 @@ export default function Home() {
       <section>
         <hgroup className="flex justify-between items-baseline mb-6">
           <Heading level={1} className="heading-b-border">
-            Hey there. 👋
+            {user ? `Hey ${user.name} 👋 ` : `Hey there. 👋`}
           </Heading>
           <Link to="/about" className="flex items-center gap-1 link">
             Read more <MdArrowOutward />
           </Link>
         </hgroup>
-        <p className="font-body text-tGray-100 text-2xl font-light">
+        <p className="font-body text-tGray-100 text-xl sm:text-2xl leading-8 font-light">
           I'm Isfaqul. Self-taught full-stack developer focused on JavaScript and React. Learning by building, breaking,
           and improving every day.
         </p>

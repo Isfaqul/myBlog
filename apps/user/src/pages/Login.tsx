@@ -2,17 +2,11 @@ import { Link, useNavigate } from "react-router";
 import Heading from "../components/Heading";
 import { useForm } from "react-hook-form";
 import type { FormDataApiError, LogInFormData } from "../types";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
 import { BASE_API_URL } from "../config/env";
+import useAuthContext from "../hooks/useAuthContext";
 
 export default function LogIn() {
-  const auth = useContext(AuthContext);
-
-  if (!auth) throw new Error("AuthContext not found");
-
-  const { logIn } = auth;
-
+  const { logIn } = useAuthContext();
   const navigate = useNavigate();
   const {
     register,
