@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { validationResult, matchedData } from "express-validator";
 import { validateLoginFormData, validateSignupFormData } from "../validation/auth.js";
-import { hashPassword } from "../utils/util.js";
+import { getRandomTailwindBgColor, hashPassword } from "../utils/util.js";
 import { prisma } from "../lib/prisma.js";
 import passport from "passport";
 import type { User } from "../@types/auth.js";
@@ -28,7 +28,9 @@ const login = [
       }
 
       // If the user has been verified, issue jwt token
-      const token = jwt.sign({ sub: { id: user.id, name: user.name } }, process.env.JWT_SECRET, { expiresIn: "1h" });
+      const token = jwt.sign({ sub: { id: user.id, name: user.name, color: user.color } }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
 
       res.json({ message: "Successfully LoggedIn", accessToken: token });
     })(req, res, next);
@@ -54,6 +56,7 @@ const signup = [
           name: name,
           username: username,
           password: passwordHash,
+          color: getRandomTailwindBgColor(),
         },
       });
 

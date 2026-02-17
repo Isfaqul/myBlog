@@ -29,18 +29,26 @@ const JWT_OPTIONS = {
   secretOrKey: JWT_SECRET,
 };
 
+type JwtPayload = {
+  id: number;
+  color: string;
+  name: string;
+  role: "ADMIN" | "USER";
+};
+
 passport.use(
-  new JwtStrategy(JWT_OPTIONS, async (payload: { sub: number }, done) => {
+  new JwtStrategy(JWT_OPTIONS, async (payload: { sub: JwtPayload }, done) => {
     try {
       const user = await prisma.user.findUnique({
         where: {
-          id: payload.sub,
+          id: payload.sub.id,
         },
         select: {
           id: true,
           name: true,
           username: true,
           role: true,
+          color: true,
         },
       });
 

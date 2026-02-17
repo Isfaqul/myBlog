@@ -54,6 +54,7 @@ export const listPosts = async (req: Request, res: Response, next: NextFunction)
             user: {
               select: {
                 name: true,
+                color: true,
               },
             },
           },
@@ -92,6 +93,7 @@ export const getPostById = async (req: Request, res: Response, next: NextFunctio
             user: {
               select: {
                 name: true,
+                color: true,
               },
             },
           },

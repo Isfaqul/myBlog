@@ -3,6 +3,7 @@ export type User = {
   name: string;
   username: string;
   password: string;
+  color: string;
   role: "USER" | "ADMIN";
   createdAt: string;
   updatedAt: string;

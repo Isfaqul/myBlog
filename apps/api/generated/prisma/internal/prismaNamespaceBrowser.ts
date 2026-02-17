@@ -77,6 +77,7 @@ export const UserScalarFieldEnum = {
   name: 'name',
   username: 'username',
   password: 'password',
+  color: 'color',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

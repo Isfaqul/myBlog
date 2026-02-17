@@ -23,6 +23,7 @@ model User {
     name      String
     username  String    @unique
     password  String
+    color     String
     posts     Post[]
     comments  Comment[]
     role      Role      @default(USER)
