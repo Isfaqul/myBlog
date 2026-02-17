@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import Main from "./components/Main";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import Footer from "./components/Footer";
 
 function App() {
   const auth = useContext(AuthContext);
@@ -20,6 +21,7 @@ function App() {
       <Main>
         <Outlet />
       </Main>
+      <Footer></Footer>
     </>
   );
 }
