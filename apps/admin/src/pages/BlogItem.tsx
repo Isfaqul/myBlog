@@ -23,7 +23,12 @@ export default function BlogItem() {
     const getBlogById = async (id: string) => {
       if (!id) return;
 
-      const response = await fetch(`${BASE_API_URL}/blog/${id}`);
+      const response = await fetch(`${BASE_API_URL}/blog/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       const data = await response.json();
       setBlog(data);
     };
@@ -88,13 +93,83 @@ export default function BlogItem() {
     }
   }
 
+  async function handlePublish() {
+    try {
+      const response = await fetch(`${BASE_API_URL}/blog/${blogId}/publish`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to publish post");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setBlog(data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function handleUnpublish() {
+    try {
+      const response = await fetch(`${BASE_API_URL}/blog/${blogId}/unpublish`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to Un-publish post");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setBlog(data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function handleDelete() {
+    try {
+      const response = await fetch(`${BASE_API_URL}/blog/${blogId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete post");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      navigate("/blog");
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return (
     <>
       <div>
         <Heading level={1} className="mb-6 heading-b-border">
-          {blog.title}
+          {blog.title} <PublishBadge isPublished={blog.published} />
         </Heading>
-        <BlogAuthorRow user={blog.user.name} publishDate={formatDate(blog.createdAt)} />
+        <BlogAuthorRow
+          onDelete={handleDelete}
+          onUnpublish={handleUnpublish}
+          isPublished={blog.published}
+          onPublish={handlePublish}
+          user={blog.user.name}
+          publishDate={formatDate(blog.createdAt)}
+        />
         <MarkDown>{blog.body}</MarkDown>
         <section className="my-30">
           <Heading level={2} size="text-2xl" className="mb-6 heading-b-border">
@@ -132,5 +207,15 @@ export default function BlogItem() {
         </section>
       </div>
     </>
+  );
+}
+
+function PublishBadge({ isPublished }: { isPublished: boolean }) {
+  return (
+    <span
+      className={`relative bottom-0.5 border font-body rounded-md text-lg font-light px-2 py-1 inline ${isPublished ? "border-green-400/50 bg-green-800/10 text-green-400/60" : "border-red-400/50 text-red-400/60 bg-red-800/10"}`}
+    >
+      {isPublished ? "Published" : "Draft"}
+    </span>
   );
 }

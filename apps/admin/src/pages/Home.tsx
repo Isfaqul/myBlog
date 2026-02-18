@@ -93,7 +93,7 @@ export default function Home() {
       reset();
       clearErrors();
 
-      navigate("/");
+      navigate("/blog");
     } catch (err) {
       console.error(err);
     }
@@ -126,11 +126,11 @@ export default function Home() {
                   required: { value: true, message: "Please enter a blog title" },
                   minLength: {
                     value: 10,
-                    message: "Name must have at least 10 characters",
+                    message: "Title must have at least 10 characters",
                   },
                   maxLength: {
                     value: 200,
-                    message: "Name must not exceed 200 characters",
+                    message: "Title must not exceed 200 characters",
                   },
                 })}
                 id="title"
@@ -154,8 +154,8 @@ export default function Home() {
                     message: "Post body must have at least 500 characters",
                   },
                   maxLength: {
-                    value: 2000,
-                    message: "Post body must not exceed 2000 characters",
+                    value: 5000,
+                    message: "Post body must not exceed 5000 characters",
                   },
                 })}
                 id="body"

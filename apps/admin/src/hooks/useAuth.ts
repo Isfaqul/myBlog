@@ -4,7 +4,7 @@ import { BASE_API_URL } from "../config/env";
 import { jwtDecode } from "jwt-decode";
 
 type JwtPayload = {
-  sub: { id: number; name: string; color: string };
+  sub: { id: number; name: string; color: string; role: "ADMIN" | "USER" };
   iat: number;
   exp: number;
 };
@@ -12,7 +12,7 @@ type JwtPayload = {
 export default function useAuth() {
   const [accessToken, setAccessToken] = useState<string | null>(() => getToken());
   const [isLoggedIn, setIsloggedIn] = useState(false);
-  const [user, setUser] = useState<{ id: number; name: string; color: string } | null>(null);
+  const [user, setUser] = useState<{ id: number; name: string; color: string; role: "ADMIN" | "USER" } | null>(null);
 
   useEffect(() => {
     const validateToken = async () => {

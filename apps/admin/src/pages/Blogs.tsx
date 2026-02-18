@@ -3,13 +3,20 @@ import BlogCard from "../components/BlogCard";
 import Heading from "../components/Heading";
 import type { BlogPost } from "../types";
 import { BASE_API_URL } from "../config/env";
+import useAuthContext from "../hooks/useAuthContext";
 
 function Blogs() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const { accessToken, user } = useAuthContext();
 
   useEffect(() => {
     const getBlogs = async () => {
-      const response = await fetch(`${BASE_API_URL}/blog`);
+      const response = await fetch(`${BASE_API_URL}/blog`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       const data = await response.json();
       setBlogPosts(data);
     };
@@ -17,7 +24,7 @@ function Blogs() {
     getBlogs();
   }, []);
 
-  const blogCards = blogPosts.map((blog) => <BlogCard key={blog.id} blog={blog} />);
+  const blogCards = blogPosts.map((blog) => <BlogCard user={user!} key={blog.id} blog={blog} />);
 
   return (
     <>

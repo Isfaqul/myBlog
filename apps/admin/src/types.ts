@@ -14,11 +14,23 @@ export type BlogPost = {
 
 export type BlogCardProps = {
   blog: BlogPost;
+  user?: JwtUserPayload;
+};
+
+export type JwtUserPayload = {
+  id: number;
+  name: string;
+  color: string;
+  role: "ADMIN" | "USER";
 };
 
 export type BlogAuthorRowProps = {
   user: string;
   publishDate: string;
+  onPublish: () => void;
+  onUnpublish: () => void;
+  onDelete: () => void;
+  isPublished: boolean;
 };
 
 export type NewPostFormData = {

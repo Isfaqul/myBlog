@@ -1,9 +1,19 @@
 import type { BlogAuthorRowProps } from "../types.js";
+import DeletePostBtn from "./DeletePostBtn.js";
+import PublishPostBtn from "./PublishPostBtn.js";
 import SharePostBtn from "./SharePostButton.js";
+import UnpublishPostBtn from "./UnpublishPostBtn.js";
 
-export default function BlogAuthorRow({ user, publishDate }: BlogAuthorRowProps) {
+export default function BlogAuthorRow({
+  user,
+  publishDate,
+  onDelete,
+  onPublish,
+  onUnpublish,
+  isPublished,
+}: BlogAuthorRowProps) {
   return (
-    <div className="flex justify-between items-center mb-6">
+    <div className="flex flex-wrap gap-4 justify-between items-center mb-6">
       <div className="flex gap-2">
         <div className="w-10">
           <img src="/icon-lg.png" alt="Author display picture" />
@@ -13,8 +23,11 @@ export default function BlogAuthorRow({ user, publishDate }: BlogAuthorRowProps)
           <p className="font-body leading-4 text-tGray-200 text-sm">{publishDate}</p>
         </div>
       </div>
-      <div>
-        <SharePostBtn />
+      <div className="flex gap-2">
+        <DeletePostBtn onClick={onDelete} />
+        {!isPublished && <PublishPostBtn onClick={onPublish} />}
+        {isPublished && <UnpublishPostBtn onClick={onUnpublish} />}
+        {isPublished && <SharePostBtn />}
       </div>
     </div>
   );

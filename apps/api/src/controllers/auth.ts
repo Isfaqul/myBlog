@@ -28,9 +28,13 @@ const login = [
       }
 
       // If the user has been verified, issue jwt token
-      const token = jwt.sign({ sub: { id: user.id, name: user.name, color: user.color } }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        { sub: { id: user.id, name: user.name, color: user.color, role: user.role } },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        },
+      );
 
       res.json({ message: "Successfully LoggedIn", accessToken: token });
     })(req, res, next);

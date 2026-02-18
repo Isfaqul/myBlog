@@ -38,29 +38,56 @@ export const addPost = [
 ];
 
 export const listPosts = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const posts = await prisma.post.findMany({
-      where: {
-        published: true,
-      },
-      include: {
-        user: {
-          select: {
-            name: true,
-          },
+  // Check if a user is loggedIN
+  const user = req.user;
+
+  const userQuery = {
+    where: {
+      published: true,
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
         },
-        comments: {
-          include: {
-            user: {
-              select: {
-                name: true,
-                color: true,
-              },
+      },
+      comments: {
+        include: {
+          user: {
+            select: {
+              name: true,
+              color: true,
             },
           },
         },
       },
-    });
+    },
+  };
+
+  const adminQuery = {
+    include: {
+      user: {
+        select: {
+          name: true,
+        },
+      },
+      comments: {
+        include: {
+          user: {
+            select: {
+              name: true,
+              color: true,
+            },
+          },
+        },
+      },
+    },
+  };
+
+  const query = user?.role === "ADMIN" ? adminQuery : userQuery;
+
+  try {
+    const posts = await prisma.post.findMany(query);
 
     res.json(posts);
   } catch (error) {
@@ -69,6 +96,8 @@ export const listPosts = async (req: Request, res: Response, next: NextFunction)
 };
 
 export const getPostById = async (req: Request, res: Response, next: NextFunction) => {
+  // Check if a user is loggedIN
+  const user = req.user;
   const postId = Number(req.params.postId);
 
   if (Number.isNaN(postId)) {
@@ -76,30 +105,57 @@ export const getPostById = async (req: Request, res: Response, next: NextFunctio
     return;
   }
 
-  try {
-    const post = await prisma.post.findUnique({
-      where: {
-        id: postId,
-        published: true,
-      },
-      include: {
-        user: {
-          select: {
-            name: true,
-          },
+  const userQuery = {
+    where: {
+      id: postId,
+      published: true,
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
         },
-        comments: {
-          include: {
-            user: {
-              select: {
-                name: true,
-                color: true,
-              },
+      },
+      comments: {
+        include: {
+          user: {
+            select: {
+              name: true,
+              color: true,
             },
           },
         },
       },
-    });
+    },
+  };
+
+  const adminQuery = {
+    where: {
+      id: postId,
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+        },
+      },
+      comments: {
+        include: {
+          user: {
+            select: {
+              name: true,
+              color: true,
+            },
+          },
+        },
+      },
+    },
+  };
+
+  const query = user?.role === "ADMIN" ? adminQuery : userQuery;
+
+  try {
+    const post = await prisma.post.findUnique(query);
 
     res.json(post);
   } catch (error) {
@@ -115,7 +171,17 @@ export const deletePost = async (req: Request, res: Response, next: NextFunction
     return;
   }
 
-  res.json({ message: `Delete post ID - ${postId} here` });
+  try {
+    await prisma.post.delete({
+      where: {
+        id: postId,
+      },
+    });
+
+    res.status(200).json({ message: "Deleted successfully." });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const editPost = async (req: Request, res: Response, next: NextFunction) => {
@@ -127,6 +193,86 @@ export const editPost = async (req: Request, res: Response, next: NextFunction) 
   }
 
   res.json({ message: `Edit post ID - ${postId} here` });
+};
+
+export const publishPost = async (req: Request, res: Response, next: NextFunction) => {
+  const postId = Number(req.params.postId);
+
+  if (Number.isNaN(postId)) {
+    next(new Error("Invalid post ID."));
+    return;
+  }
+
+  try {
+    const response = await prisma.post.update({
+      where: {
+        id: postId,
+      },
+      data: {
+        published: true,
+      },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+        comments: {
+          include: {
+            user: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const unpublishPost = async (req: Request, res: Response, next: NextFunction) => {
+  const postId = Number(req.params.postId);
+
+  if (Number.isNaN(postId)) {
+    next(new Error("Invalid post ID."));
+    return;
+  }
+
+  try {
+    const response = await prisma.post.update({
+      where: {
+        id: postId,
+      },
+      data: {
+        published: false,
+      },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+        comments: {
+          include: {
+            user: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
 };
 
 // Comment Section -------------------------------------------------------------------------

@@ -13,6 +13,6 @@ export const validatePostBody = [
     .notEmpty()
     .withMessage("Post body must not be empty.")
     .bail()
-    .isLength({ min: 500, max: 2000 })
-    .withMessage("Post body must be at least 500 characters."),
+    .isLength({ min: 500, max: 5000 })
+    .withMessage("Post body must be 500-5000 characters."),
 ];
