@@ -54,6 +54,7 @@ export type Comment = {
   createdAt: string; // ISO Date string
   user: {
     name: string;
+    color: string;
   };
 };
 

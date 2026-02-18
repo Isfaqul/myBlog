@@ -17,7 +17,7 @@ export default function BlogItem() {
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState<string | null>(null);
 
-  const { isLoggedIn, accessToken } = auth;
+  const { isLoggedIn, accessToken, user } = auth;
 
   useEffect(() => {
     const getBlogById = async (id: string) => {
@@ -34,6 +34,8 @@ export default function BlogItem() {
   if (!blog) {
     return <p>Failed to load Blog</p>;
   }
+
+  console.log(user);
 
   const commentElements =
     blog.comments && blog.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />);

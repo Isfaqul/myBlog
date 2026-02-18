@@ -116,7 +116,7 @@ const Code = ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
         <div className="size-3 bg-[#febc3c] rounded-full"></div>
         <div className="size-3 bg-[#0fcb42] rounded-full"></div>
       </div>
-      <code className="text-blue-400 leading-8 font-code" {...props}>
+      <code className="text-blue-400 leading-8 font-code whitespace-pre-wrap" {...props}>
         {children}
       </code>
     </div>
