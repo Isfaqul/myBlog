@@ -5,7 +5,8 @@
   "description": "A monorepo for Isfaqul's blog site",
   "scripts": {
     "dev:api": "npm run dev -w apps/api",
-    "dev:user": "npm run dev -w apps/user"
+    "dev:user": "npm run dev -w apps/user",
+    "dev:admin": "npm run dev -w apps/admin"
   },
   "workspaces": [
     "apps/*",

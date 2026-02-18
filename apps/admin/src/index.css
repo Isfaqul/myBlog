@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Sora:wght@100..800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Sora", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-code: "Google Sans Code", monospace;
+
+  --color-tGray-100: #ececed;
+  --color-tGray-200: #787f83;
+  --color-tGray-300: #2d2f31;
+  --color-tGray-400: #1b1d1f;
+  --color-tGray-500: #151819;
+
+  --ease-ease: cubic-bezier(0.45, 0.46, 0.13);
+}
+
+@layer base {
+  html,
+  body {
+    @apply h-full;
+  }
+}
+
+.link {
+  @apply text-tGray-100 rounded-md px-4 py-2 transition-all duration-200 ease-ease hover:bg-tGray-300/50;
+}
+
+.activeLink {
+  @apply block w-full sm:w-max text-tGray-100 bg-amber-900 rounded-md px-4 py-3 sm:py-2 transition-all duration-200 ease-ease hover:bg-amber-900/40;
+}
+
+.inactiveLink {
+  @apply block w-full sm:w-max text-tGray-100 rounded-md px-4 py-3 sm:py-2 transition-all duration-200 ease-ease hover:bg-tGray-400;
+}
+
+.heading {
+  @apply font-heading font-semibold text-tGray-100;
+}
+
+.heading-b-border {
+  @apply border-b-2 pb-2 border-b-tGray-300;
+}
+
+.formError {
+  @apply text-red-500 font-light text-xs mt-1;
+}
