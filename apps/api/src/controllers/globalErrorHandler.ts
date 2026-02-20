@@ -1,7 +1,7 @@
 import { Prisma } from "../../generated/prisma/client.js";
-import type { Response, Request } from "express";
+import type { Response, Request, NextFunction } from "express";
 
-const globalErrorHandler = (error: unknown, _req: Request, res: Response) => {
+const globalErrorHandler = (error: unknown, _req: Request, res: Response, _next: NextFunction) => {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     console.error(error);
     return res.status(500).json({ message: "Database error." });
