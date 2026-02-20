@@ -8,11 +8,13 @@ import MarkDown from "../components/MarkDown";
 import { BASE_API_URL } from "../config/env";
 import { formatDate } from "../utils/utils";
 import useAuthContext from "../hooks/useAuthContext";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function BlogItem() {
   const navigate = useNavigate();
   const auth = useAuthContext();
   const { blogId } = useParams();
+  const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState<BlogPost>();
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState<string | null>(null);
@@ -36,12 +38,9 @@ export default function BlogItem() {
     getBlogById(blogId!);
   }, [blogId]);
 
-  if (!blog) {
-    return <p>Failed to load Blog</p>;
-  }
+  if (!blog) return <LoadingSpinner />;
 
-  const commentElements =
-    blog.comments && blog.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />);
+  const commentElements = blog.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />);
 
   async function handleCommentSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -57,10 +56,8 @@ export default function BlogItem() {
       return;
     }
 
-    const URL = `${BASE_API_URL}/blog/${blogId}/comments`;
-
     try {
-      const response = await fetch(URL, {
+      const response = await fetch(`${BASE_API_URL}/blog/${blogId}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +90,7 @@ export default function BlogItem() {
 
   async function handlePublish() {
     try {
-      const response = await fetch(`${BASE_API_URL}/blog/${blogId}/publish`, {
+      const response = await fetch(`${BASE_API_URL}/admin/blog/${blogId}/publish`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -114,7 +111,7 @@ export default function BlogItem() {
 
   async function handleUnpublish() {
     try {
-      const response = await fetch(`${BASE_API_URL}/blog/${blogId}/unpublish`, {
+      const response = await fetch(`${BASE_API_URL}/admin/blog/${blogId}/unpublish`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -135,7 +132,7 @@ export default function BlogItem() {
 
   async function handleDelete() {
     try {
-      const response = await fetch(`${BASE_API_URL}/blog/${blogId}`, {
+      const response = await fetch(`${BASE_API_URL}/admin/blog/${blogId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -153,6 +150,8 @@ export default function BlogItem() {
       throw error;
     }
   }
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>

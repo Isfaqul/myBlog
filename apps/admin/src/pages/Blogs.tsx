@@ -27,6 +27,7 @@ function Blogs() {
 
         setBlogPosts(data);
       } catch (error) {
+        console.log(error);
       } finally {
         setLoading(false);
       }
