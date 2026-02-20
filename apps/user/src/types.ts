@@ -9,7 +9,7 @@ export type BlogPost = {
   user: {
     name: string;
   };
-  comments?: Comment[];
+  comments: Comment[];
 };
 
 export type BlogCardProps = {

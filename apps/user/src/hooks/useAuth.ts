@@ -11,6 +11,7 @@ type JwtPayload = {
 
 export default function useAuth() {
   const [accessToken, setAccessToken] = useState<string | null>(() => getToken());
+  const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsloggedIn] = useState(false);
   const [user, setUser] = useState<{ id: number; name: string; color: string } | null>(null);
 
@@ -21,6 +22,8 @@ export default function useAuth() {
         setUser(null);
         return;
       }
+
+      setLoading(true);
 
       try {
         const response = await fetch(`${BASE_API_URL}/auth/me`, {
@@ -43,8 +46,11 @@ export default function useAuth() {
         setUser(decoded.sub);
         setIsloggedIn(true);
       } catch (error) {
+        setAccessToken(null);
         setUser(null);
         setIsloggedIn(false);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -58,8 +64,9 @@ export default function useAuth() {
 
   const logOut = () => {
     clearToken();
+    setUser(null);
     setAccessToken(null);
   };
 
-  return { logIn, logOut, isLoggedIn, accessToken, user };
+  return { logIn, logOut, isLoggedIn, accessToken, user, loading };
 }

@@ -6,13 +6,16 @@ import type { BlogPost } from "../types";
 import { Link } from "react-router";
 import { BASE_API_URL } from "../config/env";
 import useAuthContext from "../hooks/useAuthContext";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const { user } = useAuthContext();
 
   useEffect(() => {
     const getBlogs = async () => {
+      setLoading(true);
       try {
         const response = await fetch(`${BASE_API_URL}/blog`);
 
@@ -25,6 +28,8 @@ export default function Home() {
         setPosts(data);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -32,6 +37,8 @@ export default function Home() {
   }, []);
 
   const blogCards = posts.slice(0, 3).map((blog) => <BlogCard key={blog.id} blog={blog} />);
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>

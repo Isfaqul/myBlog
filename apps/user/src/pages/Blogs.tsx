@@ -3,15 +3,29 @@ import BlogCard from "../components/BlogCard";
 import Heading from "../components/Heading";
 import type { BlogPost } from "../types";
 import { BASE_API_URL } from "../config/env";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function Blogs() {
+  const [loading, setLoading] = useState(true);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
     const getBlogs = async () => {
-      const response = await fetch(`${BASE_API_URL}/blog`);
-      const data = await response.json();
-      setBlogPosts(data);
+      setLoading(true);
+
+      try {
+        const response = await fetch(`${BASE_API_URL}/blog`, {
+          method: "GET",
+        });
+
+        const data = await response.json();
+
+        setBlogPosts(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     getBlogs();
@@ -32,7 +46,7 @@ function Blogs() {
         </p>
       </section>
       <section className="max-w-2xl mx-auto mt-12">
-        <div className="space-y-5">{blogCards}</div>
+        {loading ? <LoadingSpinner /> : <div className="space-y-5">{blogCards}</div>}
       </section>
     </>
   );

@@ -9,7 +9,7 @@ export default function Footer({ className }: MainProps) {
   return (
     <footer className={`${baseClasses} ${className ?? ""}`}>
       <MainContentWrapper>
-        <div className="flex font-body gap-4 items-center justify-between">
+        <div className="flex flex-wrap font-body gap-4 items-center justify-between">
           <FooterLinkText href="https://www.google.com" target="_blank">
             Contact
           </FooterLinkText>

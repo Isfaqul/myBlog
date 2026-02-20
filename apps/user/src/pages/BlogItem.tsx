@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useEffect, useState, type SyntheticEvent } from "react";
 import type { BlogPost, Comment } from "../types";
 import BlogAuthorRow from "../components/BlogAuthorRow";
@@ -8,44 +8,52 @@ import MarkDown from "../components/MarkDown";
 import { BASE_API_URL } from "../config/env";
 import { formatDate } from "../utils/utils";
 import useAuthContext from "../hooks/useAuthContext";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function BlogItem() {
-  const navigate = useNavigate();
   const auth = useAuthContext();
   const { blogId } = useParams();
-  const [blog, setBlog] = useState<BlogPost>();
+  const [loading, setLoading] = useState(true);
+  const [blog, setBlog] = useState<BlogPost | null>(null);
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState<string | null>(null);
 
-  const { isLoggedIn, accessToken, user } = auth;
+  const { isLoggedIn, accessToken } = auth;
 
   useEffect(() => {
     const getBlogById = async (id: string) => {
       if (!id) return;
 
-      const response = await fetch(`${BASE_API_URL}/blog/${id}`);
-      const data = await response.json();
-      setBlog(data);
+      setLoading(true);
+      try {
+        const response = await fetch(`${BASE_API_URL}/blog/${id}`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch blog");
+        }
+
+        const data = await response.json();
+
+        setBlog(data);
+      } catch (error) {
+        throw error;
+      } finally {
+        setLoading(false);
+      }
     };
 
     getBlogById(blogId!);
   }, [blogId]);
 
-  if (!blog) {
-    return <p>Failed to load Blog</p>;
-  }
+  if (!blog) return <LoadingSpinner />;
 
-  console.log(user);
-
-  const commentElements =
-    blog.comments && blog.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />);
+  const commentElements = blog.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />);
 
   async function handleCommentSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!isLoggedIn) {
       setCommentError("You must log in to comment");
-      navigate("/auth/login");
       return;
     }
 
@@ -54,10 +62,8 @@ export default function BlogItem() {
       return;
     }
 
-    const URL = `${BASE_API_URL}/blog/${blogId}/comments`;
-
     try {
-      const response = await fetch(URL, {
+      const response = await fetch(`${BASE_API_URL}/blog/${blogId}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,6 +93,8 @@ export default function BlogItem() {
       console.log(err);
     }
   }
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>

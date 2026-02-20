@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import type { FormDataApiError, LogInFormData } from "../types";
 import { BASE_API_URL } from "../config/env";
 import useAuthContext from "../hooks/useAuthContext";
+import { useLocation } from "react-router";
 
 export default function LogIn() {
   const { logIn } = useAuthContext();
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     register,
@@ -58,7 +60,9 @@ export default function LogIn() {
       reset();
       clearErrors();
 
-      navigate("/");
+      const from = location?.state?.from?.pathname || "/";
+
+      navigate(from, { replace: true });
     } catch (err) {
       console.error(err);
     }

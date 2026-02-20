@@ -3,12 +3,15 @@ import Heading from "../components/Heading";
 import { BASE_API_URL } from "../config/env";
 import MarkDown from "../components/MarkDown";
 import type { AboutResponse } from "../types";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function About() {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState<AboutResponse>();
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(`${BASE_API_URL}/content/about`, {
           method: "GET",
@@ -23,27 +26,27 @@ export default function About() {
         setData(aboutPageData);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  const likes =
-    data?.likes &&
-    data?.likes.map((item) => (
-      <p key={item} className="inline font-body text-green-300/70 bg-green-900/20 w-max px-2 py-1 rounded-md">
-        {item}
-      </p>
-    ));
+  const likes = data?.likes.map((item) => (
+    <p key={item} className="inline font-body text-green-300/70 bg-green-900/20 w-max px-2 py-1 rounded-md">
+      {item}
+    </p>
+  ));
 
-  const dislikes =
-    data?.dislikes &&
-    data?.dislikes.map((item) => (
-      <p key={item} className="inline font-body text-red-200/70 bg-red-400/20 w-max px-2 py-1 rounded-md">
-        {item}
-      </p>
-    ));
+  const dislikes = data?.dislikes.map((item) => (
+    <p key={item} className="inline font-body text-red-200/70 bg-red-400/20 w-max px-2 py-1 rounded-md">
+      {item}
+    </p>
+  ));
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>
