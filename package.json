@@ -1,23 +1,17 @@
 {
   "name": "blog",
-  "private": true,
   "version": "1.0.0",
   "description": "A monorepo for Isfaqul's blog site",
+  "main": "index.js",
   "scripts": {
-    "dev:api": "npm run dev -w apps/api",
-    "dev:user": "npm run dev -w apps/user",
-    "dev:admin": "npm run dev -w apps/admin",
-    "build:user": "npm run build -w apps/user",
-    "build:admin": "npm run build -w apps/admin"
+    "dev:api": "pnpm --filter api dev",
+    "dev:user": "pnpm --filter user dev",
+    "dev:admin": "pnpm --filter admin dev",
+    "build:user": "pnpm --filter user build",
+    "build:admin": "pnpm --filter admin build"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "keywords": [],
   "author": "Isfaqul",
   "license": "ISC",
-  "devDependencies": {
-    "typescript": "^5.9.3"
-  }
+  "packageManager": "pnpm@10.30.1"
 }
