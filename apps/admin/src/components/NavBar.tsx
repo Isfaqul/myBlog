@@ -1,4 +1,4 @@
-import { MdClose, MdMenu, MdOutlineDarkMode } from "react-icons/md";
+import { MdClose, MdMenu } from "react-icons/md";
 import { Link, NavLink } from "react-router";
 import { type AuthContextType } from "../context/AuthContext";
 import { useEffect, useState } from "react";
