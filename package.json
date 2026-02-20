@@ -6,7 +6,9 @@
   "scripts": {
     "dev:api": "npm run dev -w apps/api",
     "dev:user": "npm run dev -w apps/user",
-    "dev:admin": "npm run dev -w apps/admin"
+    "dev:admin": "npm run dev -w apps/admin",
+    "build:user": "npm run build -w apps/user",
+    "build:admin": "npm run build -w apps/admin"
   },
   "workspaces": [
     "apps/*",

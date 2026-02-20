@@ -4,7 +4,8 @@
   "description": "Api server for the blog site",
   "scripts": {
     "build": "tsc",
-    "dev": "tsx --watch src/index.ts"
+    "dev": "tsx --watch src/index.ts",
+    "start": "node dist/src/index.js"
   },
   "keywords": [],
   "author": "",
