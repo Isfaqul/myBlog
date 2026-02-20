@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Api server for the blog site",
   "scripts": {
+    "build": "tsc",
     "dev": "tsx --watch src/index.ts"
   },
   "keywords": [],
