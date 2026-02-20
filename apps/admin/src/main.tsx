@@ -12,6 +12,7 @@ import AuthLayout from "./Layouts/Auth.tsx";
 import LogIn from "./pages/Login.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import Error from "./pages/Error.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
         <App />
       </ProtectedRoute>
     ),
+    errorElement: <Error />,
     children: [
       {
         index: true,
