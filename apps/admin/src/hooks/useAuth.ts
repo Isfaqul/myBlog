@@ -40,9 +40,19 @@ export default function useAuth() {
         }
 
         const decoded = jwtDecode<JwtPayload>(accessToken);
+
+        if (decoded.sub.role !== "ADMIN") {
+          clearToken();
+          setAccessToken(null);
+          setUser(null);
+          setIsloggedIn(false);
+          throw new Error("You need Admin Access to login.");
+        }
+
         setUser(decoded.sub);
         setIsloggedIn(true);
       } catch (error) {
+        setAccessToken(null);
         setUser(null);
         setIsloggedIn(false);
       }
@@ -58,6 +68,7 @@ export default function useAuth() {
 
   const logOut = () => {
     clearToken();
+    setUser(null);
     setAccessToken(null);
   };
 

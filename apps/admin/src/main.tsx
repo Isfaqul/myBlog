@@ -11,6 +11,7 @@ import SignUp from "./pages/Signup.tsx";
 import AuthLayout from "./Layouts/Auth.tsx";
 import LogIn from "./pages/Login.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +20,19 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Home,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "blog",
-        Component: Blogs,
+        element: (
+          <ProtectedRoute>
+            <Blogs />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "blog/:blogId",

@@ -67,10 +67,10 @@ export default function LogIn() {
   return (
     <>
       <p className="font-heading text-tGray-100 text-xl text-center">Welcome to</p>
-      <Heading level={1} className="text-center heading-b-border w-max mx-auto" size="text-4xl">
+      <Heading level={1} className="text-center heading-b-border w-max mx-auto">
         Pixelord's Blog
       </Heading>
-      <Heading level={2} size="text-xl" className="mt-16 max-w-sm mx-auto">
+      <Heading level={2} className="mt-16 max-w-sm mx-auto">
         Let's Log in
       </Heading>
       <div className="p-8 border border-tGray-300 rounded-md mt-4 max-w-sm mx-auto">
