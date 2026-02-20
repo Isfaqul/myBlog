@@ -84,9 +84,13 @@ const Block = ({ children, ...props }: ComponentPropsWithoutRef<"blockquote">) =
   );
 };
 
+const Line = ({ ...props }: ComponentPropsWithoutRef<"hr">) => {
+  return <hr className="border-tGray-300 my-5" {...props} />;
+};
+
 const UL = ({ children, ...props }: ComponentPropsWithoutRef<"ul">) => {
   return (
-    <ul className="text-tGray-100 font-body space-y-2 list-disc" {...props}>
+    <ul className="ml-5 text-tGray-100 font-body text-xl font-light space-y-2 list-disc" {...props}>
       {children}
     </ul>
   );
@@ -94,7 +98,7 @@ const UL = ({ children, ...props }: ComponentPropsWithoutRef<"ul">) => {
 
 const OL = ({ children, ...props }: ComponentPropsWithoutRef<"ol">) => {
   return (
-    <ol className="text-tGray-100 font-body space-y-2 list-decimal" {...props}>
+    <ol className="ml-5 text-tGray-100 font-body text-xl font-light space-y-2 list-decimal" {...props}>
       {children}
     </ol>
   );
@@ -116,9 +120,12 @@ const Code = ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
         <div className="size-3 bg-[#febc3c] rounded-full"></div>
         <div className="size-3 bg-[#0fcb42] rounded-full"></div>
       </div>
-      <code className="text-blue-400 leading-8 font-code whitespace-pre-wrap" {...props}>
-        {children}
-      </code>
+
+      <pre className="overflow-x-auto">
+        <code className="text-blue-400 leading-8 font-code whitespace-pre" {...props}>
+          {children}
+        </code>
+      </pre>
     </div>
   );
 };
@@ -140,6 +147,7 @@ function MarkDown({ children }: { children: string }) {
         em: Em,
         strong: Bold,
         blockquote: Block,
+        hr: Line,
       }}
     >
       {children}

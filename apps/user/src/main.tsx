@@ -11,11 +11,13 @@ import SignUp from "./pages/Signup.tsx";
 import AuthLayout from "./Layouts/Auth.tsx";
 import LogIn from "./pages/Login.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
+import Error from "./pages/Error.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: App,
+    errorElement: <Error />,
     children: [
       {
         index: true,

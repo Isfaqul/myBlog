@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useEffect, useState, type SyntheticEvent } from "react";
 import type { BlogPost, Comment } from "../types";
 import BlogAuthorRow from "../components/BlogAuthorRow";
@@ -33,7 +33,7 @@ export default function BlogItem() {
         }
 
         const data = await response.json();
-
+        if (!data) throw new Error("Post does not exist");
         setBlog(data);
       } catch (error) {
         throw error;
@@ -45,7 +45,19 @@ export default function BlogItem() {
     getBlogById(blogId!);
   }, [blogId]);
 
-  if (!blog) return <LoadingSpinner />;
+  if (loading) return <LoadingSpinner />;
+
+  if (!blog)
+    return (
+      <div className="flex justify-center items-center">
+        <p className="text-tGray-100 font-body text-lg">
+          Oops! Post does not exist{" "}
+          <Link to="/blog" className="underline font-body transition-all ease-out text-blue-400 hover:text-blue-500">
+            Go Back
+          </Link>
+        </p>
+      </div>
+    );
 
   const commentElements = blog.comments.map((comment) => <CommentCard key={comment.id} comment={comment} />);
 
@@ -93,8 +105,6 @@ export default function BlogItem() {
       console.log(err);
     }
   }
-
-  if (loading) return <LoadingSpinner />;
 
   return (
     <>
