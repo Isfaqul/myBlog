@@ -4,27 +4,40 @@ import Heading from "../components/Heading";
 import type { BlogPost } from "../types";
 import { BASE_API_URL } from "../config/env";
 import useAuthContext from "../hooks/useAuthContext";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function Blogs() {
+  const [loading, setLoading] = useState(false);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const { accessToken, user } = useAuthContext();
 
   useEffect(() => {
     const getBlogs = async () => {
-      const response = await fetch(`${BASE_API_URL}/blog`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      const data = await response.json();
-      setBlogPosts(data);
+      setLoading(true);
+
+      try {
+        const response = await fetch(`${BASE_API_URL}/blog`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const data = await response.json();
+
+        setBlogPosts(data);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     };
 
     getBlogs();
   }, []);
 
   const blogCards = blogPosts.map((blog) => <BlogCard user={user!} key={blog.id} blog={blog} />);
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>

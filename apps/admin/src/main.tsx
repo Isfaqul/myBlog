@@ -16,23 +16,19 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: App,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
-        element: (
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        ),
+        Component: Home,
       },
       {
         path: "blog",
-        element: (
-          <ProtectedRoute>
-            <Blogs />
-          </ProtectedRoute>
-        ),
+        Component: Blogs,
       },
       {
         path: "blog/:blogId",

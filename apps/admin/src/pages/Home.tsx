@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
 import Heading from "../components/Heading";
-import type { BlogPost, NewPostFormData } from "../types";
+import type { NewPostFormData } from "../types";
 import { BASE_API_URL } from "../config/env";
 import useAuthContext from "../hooks/useAuthContext";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 
 export default function Home() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [postError, setPostError] = useState<string | null>(null);
   const { user, isLoggedIn, accessToken } = useAuthContext();
   const navigate = useNavigate();
   const {
@@ -25,26 +22,6 @@ export default function Home() {
     },
   });
 
-  useEffect(() => {
-    const getBlogs = async () => {
-      try {
-        const response = await fetch(`${BASE_API_URL}/blog`);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch data.");
-        }
-
-        const data = await response.json();
-
-        setPosts(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getBlogs();
-  }, []);
-
   const onSubmit = async (data: NewPostFormData) => {
     if (!isLoggedIn) {
       navigate("/auth/login");
@@ -57,7 +34,7 @@ export default function Home() {
     };
 
     try {
-      const apiResponse = await fetch(`${BASE_API_URL}/blog`, {
+      const apiResponse = await fetch(`${BASE_API_URL}/admin/blog`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

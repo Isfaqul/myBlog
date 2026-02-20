@@ -3,12 +3,15 @@ import Heading from "../components/Heading";
 import { BASE_API_URL } from "../config/env";
 import MarkDown from "../components/MarkDown";
 import type { AboutResponse } from "../types";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function About() {
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<AboutResponse>();
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(`${BASE_API_URL}/content/about`, {
           method: "GET",
@@ -23,6 +26,8 @@ export default function About() {
         setData(aboutPageData);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -44,6 +49,8 @@ export default function About() {
         {item}
       </p>
     ));
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>
