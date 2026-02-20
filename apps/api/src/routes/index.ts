@@ -1,4 +1,4 @@
-import { Router, type NextFunction } from "express";
+import { Router, type NextFunction, type Request, type Response } from "express";
 import blogRouter from "./blog.js";
 import authRouter from "./auth.js";
 import globalErrorHandler from "../controllers/globalErrorHandler.js";
@@ -13,7 +13,7 @@ router.use("/content", contentRouter);
 router.use("/admin", adminRouter);
 
 // 404 Handler
-router.use((next: NextFunction) => {
+router.use((_req: Request, _res: Response, next: NextFunction) => {
   next(new Error("No resources found. Invalid URL."));
 });
 
