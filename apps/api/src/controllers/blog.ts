@@ -156,7 +156,6 @@ export const getPostById = async (req: Request, res: Response, next: NextFunctio
 
   try {
     const post = await prisma.post.findUnique(query);
-
     res.json(post);
   } catch (error) {
     next(error);
