@@ -1,5 +1,5 @@
 export const aboutMe = `
-I'm Isfaqul. Self-taught full-stack developer focused on [TypeScript](https://www.typescriptlang.org/) and [React](https://react.dev/). Learning by building, breaking, and improving every day.
+I am a Self-taught full-stack developer focused on [TypeScript](https://www.typescriptlang.org/) and [React](https://react.dev/). Learning by building, breaking, and improving every day.
 
 This blog is a place where I write about what I’m learning, the problems I run into, and the small insights that come from working through them. I care about understanding how things actually work—not just making them work.
 

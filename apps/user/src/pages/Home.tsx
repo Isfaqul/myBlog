@@ -53,8 +53,8 @@ export default function Home() {
           </Link>
         </hgroup>
         <p className="font-body text-tGray-100 text-xl sm:text-2xl leading-8 font-light">
-          I'm Isfaqul. Self-taught full-stack developer focused on JavaScript and React. Learning by building, breaking,
-          and improving every day.
+          I am a Self-taught full-stack developer focused on JavaScript and React. Learning by building, breaking, and
+          improving every day.
         </p>
       </section>
       <section className="max-w-2xl mx-auto mt-12">
