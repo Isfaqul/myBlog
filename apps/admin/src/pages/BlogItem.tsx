@@ -123,7 +123,6 @@ export default function BlogItem() {
       }
 
       const data = await response.json();
-      console.log(data);
       setBlog(data);
     } catch (error) {
       throw error;
@@ -147,7 +146,6 @@ export default function BlogItem() {
       }
 
       const data = await response.json();
-      console.log(data);
       setBlog(data);
     } catch (error) {
       throw error;
@@ -169,9 +167,7 @@ export default function BlogItem() {
         throw new Error("Failed to delete post");
       }
 
-      const data = await response.json();
-      console.log(data);
-      navigate("/blog");
+      navigate("/blog", { replace: true });
     } catch (error) {
       throw error;
     }
