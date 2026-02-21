@@ -9,22 +9,22 @@ export default function Footer({ className }: MainProps) {
   return (
     <footer className={`${baseClasses} ${className ?? ""}`}>
       <MainContentWrapper>
-        <div className="flex font-body gap-4 items-center justify-between">
-          <FooterLinkText href="https://www.google.com" target="_blank">
+        <div className="flex flex-wrap font-body gap-4 items-center justify-between">
+          <FooterLinkText href="https://www.google.com" target="_blank" aria-label="Link to Contact">
             Contact
           </FooterLinkText>
           <div className="flex gap-4 justify-center">
-            <FooterLinkIcon href="https://www.github.com" target="_blank">
+            <FooterLinkIcon href="https://www.github.com" target="_blank" aria-label="Link to Github">
               <FaGithub className="text-tGray-200" />
             </FooterLinkIcon>
-            <FooterLinkIcon href="https://www.x.com" target="_blank">
+            <FooterLinkIcon href="https://www.x.com" target="_blank" aria-label="Link to Twitter/X">
               <FaTwitter className="text-tGray-200" />
             </FooterLinkIcon>
-            <FooterLinkIcon href="https://www.instagram.com" target="_blank">
+            <FooterLinkIcon href="https://www.instagram.com" target="_blank" aria-label="Link to Instagram">
               <FaInstagram className="text-tGray-200" />
             </FooterLinkIcon>
           </div>
-          <FooterLinkText href="https://www.google.com" target="_blank">
+          <FooterLinkText href="https://www.google.com" target="_blank" aria-label="Link to Privacy Policies">
             Privacy
           </FooterLinkText>
         </div>
