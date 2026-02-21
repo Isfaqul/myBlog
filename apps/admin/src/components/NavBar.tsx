@@ -23,7 +23,7 @@ export default function NavBar({ auth }: { auth: AuthContextType }) {
     <nav className="relative flex items-center justify-between p-3">
       <div className="size-8 shrink-0">
         <Link to="/">
-          <img src="/icon-lg.png" className="w-full" alt="Isfaqul's memoji face on pink background" />
+          <img src="/icon-lg.png" className="w-8" alt="Isfaqul's memoji face on pink background" />
         </Link>
       </div>
       <ul className="hidden sm:flex justify-center gap-2">
