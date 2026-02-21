@@ -47,8 +47,9 @@ export default function Home() {
           <Heading level={1} className="heading-b-border">
             {user ? `Hey ${user.name} 👋 ` : `Hey there. 👋`}
           </Heading>
-          <Link to="/about" className="flex items-center gap-1 link">
-            Read more <MdArrowOutward />
+          <Link to="/about" className="flex items-center gap-1 link group">
+            Read more{" "}
+            <MdArrowOutward className="transition-all duration-100 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </hgroup>
         <p className="font-body text-tGray-100 text-xl sm:text-2xl leading-8 font-light">
@@ -61,8 +62,9 @@ export default function Home() {
           <Heading level={2} className="heading-b-border">
             Latest Posts
           </Heading>
-          <Link to="/blog" className="flex items-center gap-1 link">
-            View all <MdArrowOutward />
+          <Link to="/blog" className="flex items-center gap-1 link group">
+            View all{" "}
+            <MdArrowOutward className="transition-all duration-100 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </hgroup>
         <div className="space-y-5">{blogCards}</div>
