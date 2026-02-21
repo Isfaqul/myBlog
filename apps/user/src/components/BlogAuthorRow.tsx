@@ -6,7 +6,7 @@ export default function BlogAuthorRow({ user, publishDate }: BlogAuthorRowProps)
     <div className="flex justify-between items-center mb-6">
       <div className="flex gap-2">
         <div className="w-10">
-          <img src="/icon-lg.png" alt="Author display picture" />
+          <img src="/icon-lg.png" className="size-10" alt="Author display picture" />
         </div>
         <div className="">
           <p className="font-body leading-5.5 text-tGray-100">{user}</p>

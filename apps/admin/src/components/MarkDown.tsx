@@ -22,7 +22,7 @@ const H1 = ({ children, ...props }: ComponentPropsWithoutRef<"h1">) => {
 
 const H2 = ({ children, ...props }: ComponentPropsWithoutRef<"h2">) => {
   return (
-    <Heading level={2} size="text-2xl" className="mt-8" {...props}>
+    <Heading level={2} size="text-2xl" className="mt-10 mb-2" {...props}>
       {children}
     </Heading>
   );
@@ -30,7 +30,7 @@ const H2 = ({ children, ...props }: ComponentPropsWithoutRef<"h2">) => {
 
 const H3 = ({ children, ...props }: ComponentPropsWithoutRef<"h3">) => {
   return (
-    <Heading level={3} size="text-xl" className="mt-8" {...props}>
+    <Heading level={3} size="text-xl" className="mt-10 mb-2" {...props}>
       {children}
     </Heading>
   );
@@ -38,7 +38,7 @@ const H3 = ({ children, ...props }: ComponentPropsWithoutRef<"h3">) => {
 
 const H4 = ({ children, ...props }: ComponentPropsWithoutRef<"h4">) => {
   return (
-    <Heading level={4} size="text-lg" className="mt-8" {...props}>
+    <Heading level={4} size="text-lg" className="mt-10 mb-2" {...props}>
       {children}
     </Heading>
   );
