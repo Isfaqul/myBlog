@@ -24,7 +24,6 @@ export default function BlogItem() {
     const getBlogById = async (id: string) => {
       if (!id) return;
 
-      setLoading(true);
       try {
         const response = await fetch(`${BASE_API_URL}/blog/${id}`);
 

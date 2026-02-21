@@ -44,6 +44,8 @@ export default function BlogItem() {
     getBlogById(blogId!);
   }, [blogId]);
 
+  if (loading) return <LoadingSpinner />;
+
   if (!blog)
     return (
       <div className="flex justify-center items-center">
@@ -166,8 +168,6 @@ export default function BlogItem() {
       throw error;
     }
   }
-
-  if (loading) return <LoadingSpinner />;
 
   return (
     <>
