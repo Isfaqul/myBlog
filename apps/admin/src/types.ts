@@ -31,6 +31,8 @@ export type BlogAuthorRowProps = {
   onUnpublish: () => void;
   onDelete: () => void;
   isPublished: boolean;
+  isPublishing: boolean;
+  isUnpublishing: boolean;
 };
 
 export type NewPostFormData = {

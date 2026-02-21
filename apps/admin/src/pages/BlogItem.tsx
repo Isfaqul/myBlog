@@ -16,6 +16,8 @@ export default function BlogItem() {
   const { blogId } = useParams();
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState<BlogPost>();
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [isUnpublishing, setIsUnpublishing] = useState(false);
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState<string | null>(null);
 
@@ -107,6 +109,7 @@ export default function BlogItem() {
   }
 
   async function handlePublish() {
+    setIsPublishing(true);
     try {
       const response = await fetch(`${BASE_API_URL}/admin/blog/${blogId}/publish`, {
         method: "POST",
@@ -124,10 +127,13 @@ export default function BlogItem() {
       setBlog(data);
     } catch (error) {
       throw error;
+    } finally {
+      setIsPublishing(false);
     }
   }
 
   async function handleUnpublish() {
+    setIsUnpublishing(true);
     try {
       const response = await fetch(`${BASE_API_URL}/admin/blog/${blogId}/unpublish`, {
         method: "POST",
@@ -145,6 +151,8 @@ export default function BlogItem() {
       setBlog(data);
     } catch (error) {
       throw error;
+    } finally {
+      setIsUnpublishing(false);
     }
   }
 
@@ -177,6 +185,8 @@ export default function BlogItem() {
         </Heading>
         <BlogAuthorRow
           onDelete={handleDelete}
+          isPublishing={isPublishing}
+          isUnpublishing={isUnpublishing}
           onUnpublish={handleUnpublish}
           isPublished={blog.published}
           onPublish={handlePublish}

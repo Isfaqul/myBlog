@@ -7,6 +7,8 @@ import UnpublishPostBtn from "./UnpublishPostBtn.js";
 export default function BlogAuthorRow({
   user,
   publishDate,
+  isPublishing,
+  isUnpublishing,
   onDelete,
   onPublish,
   onUnpublish,
@@ -25,8 +27,8 @@ export default function BlogAuthorRow({
       </div>
       <div className="flex gap-2">
         <DeletePostBtn onClick={onDelete} />
-        {!isPublished && <PublishPostBtn onClick={onPublish} />}
-        {isPublished && <UnpublishPostBtn onClick={onUnpublish} />}
+        {!isPublished && <PublishPostBtn isPublishing={isPublishing} onClick={onPublish} />}
+        {isPublished && <UnpublishPostBtn isUnpublishing={isUnpublishing} onClick={onUnpublish} />}
         {isPublished && <SharePostBtn />}
       </div>
     </div>
