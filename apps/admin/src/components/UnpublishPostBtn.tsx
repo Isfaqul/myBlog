@@ -1,4 +1,4 @@
-import { MdUndo, MdCircle } from "react-icons/md";
+import { MdUndo } from "react-icons/md";
 import { ImSpinner8 } from "react-icons/im";
 
 export default function UnpublishPostBtn({
@@ -12,7 +12,7 @@ export default function UnpublishPostBtn({
 
   return (
     <button type="button" onClick={onClick} className={`${baseStyle} ${"text-tGray-500"}`}>
-      Un-Publish {isUnpublishing ? <MdCircle /> : <ImSpinner8 className="animate-loading" />}
+      Un-Publish {isUnpublishing ? <ImSpinner8 className="animate-loading" /> : <MdUndo />}
     </button>
   );
 }

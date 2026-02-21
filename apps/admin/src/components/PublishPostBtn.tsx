@@ -1,4 +1,4 @@
-import { MdCircle, MdPublish } from "react-icons/md";
+import { MdPublish } from "react-icons/md";
 import { ImSpinner8 } from "react-icons/im";
 
 export default function PublishPostBtn({ onClick, isPublishing }: { onClick: () => void; isPublishing: boolean }) {
@@ -6,7 +6,7 @@ export default function PublishPostBtn({ onClick, isPublishing }: { onClick: () 
 
   return (
     <button type="button" onClick={onClick} className={`${baseStyle} ${"text-tGray-500"}`}>
-      Publish {isPublishing ? <MdCircle /> : <ImSpinner8 className="animate-loading" />}
+      Publish {isPublishing ? <ImSpinner8 className="animate-loading" /> : <MdPublish />}
     </button>
   );
 }
