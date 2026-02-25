@@ -27,6 +27,8 @@ apps/
 
 ### Frontend (User + Admin)
 
+Access [here](https://isfaq-blog.netlify.app)
+
 - React
 - TypeScript
 - Vite
