@@ -10,11 +10,11 @@ export default function Footer({ className }: MainProps) {
     <footer className={`${baseClasses} ${className ?? ""}`}>
       <MainContentWrapper>
         <div className="flex flex-wrap font-body gap-4 items-center justify-between">
-          <FooterLinkText href="https://www.google.com" target="_blank" aria-label="Link to Contact">
+          <FooterLinkText href="https://github.com/Isfaqul" target="_blank" aria-label="Link to Contact">
             Contact
           </FooterLinkText>
           <div className="flex gap-4 justify-center">
-            <FooterLinkIcon href="https://www.github.com" target="_blank" aria-label="Link to Github">
+            <FooterLinkIcon href="https://github.com/Isfaqul" target="_blank" aria-label="Link to Github">
               <FaGithub className="text-tGray-200" />
             </FooterLinkIcon>
             <FooterLinkIcon href="https://www.x.com" target="_blank" aria-label="Link to Twitter/X">
