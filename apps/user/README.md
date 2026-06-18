@@ -14,3 +14,5 @@ This is where visitors can:
 - Learn more about me
 
 The site talks to the backend API for all data. It does not store anything on its own.
+
+- The blog posts are being stored as markdown strings which is then being
