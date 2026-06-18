@@ -117,6 +117,9 @@ importers:
       pg:
         specifier: ^8.18.0
         version: 8.18.0
+      prisma:
+        specifier: ^7.3.0
+        version: 7.4.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -145,9 +148,6 @@ importers:
       '@types/pg':
         specifier: ^8.16.0
         version: 8.16.0
-      prisma:
-        specifier: ^7.3.0
-        version: 7.4.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
 
   apps/user:
     dependencies:
