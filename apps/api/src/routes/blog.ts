@@ -1,9 +1,14 @@
 import { Router } from "express";
-import { editComment, getPostById, listPosts, postComment } from "../controllers/blog.js";
+import {
+  editComment,
+  getPostById,
+  listPosts,
+  postComment,
+} from "../controllers/blog.js";
 import { requireLogin } from "../auth/middlewares/requireLogin.js";
 import { optionalAuth } from "../auth/middlewares/optionalAuth.js";
 
-const blogRouter = Router();
+const blogRouter: Router = Router();
 
 blogRouter.get("/", optionalAuth, listPosts);
 blogRouter.get("/:postId", optionalAuth, getPostById);

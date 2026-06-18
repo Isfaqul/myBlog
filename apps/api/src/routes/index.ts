@@ -1,11 +1,16 @@
-import { Router, type NextFunction, type Request, type Response } from "express";
+import {
+  Router,
+  type NextFunction,
+  type Request,
+  type Response,
+} from "express";
 import blogRouter from "./blog.js";
 import authRouter from "./auth.js";
 import globalErrorHandler from "../controllers/globalErrorHandler.js";
 import contentRouter from "./content.js";
 import adminRouter from "./admin.js";
 
-const router = Router();
+const router: Router = Router();
 
 router.use("/blog", blogRouter);
 router.use("/auth", authRouter);

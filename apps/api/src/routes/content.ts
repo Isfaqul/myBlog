@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getAboutPageContent } from "../controllers/content.js";
 
-const contentRouter = Router();
+const contentRouter: Router = Router();
 
 contentRouter.get("/about", getAboutPageContent);
 
