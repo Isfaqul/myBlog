@@ -24,7 +24,8 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "pg": "^8.18.0"
+    "pg": "^8.18.0",
+    "prisma": "^7.3.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
@@ -34,7 +35,6 @@
     "@types/passport": "^1.0.17",
     "@types/passport-jwt": "^4.0.1",
     "@types/passport-local": "^1.0.38",
-    "@types/pg": "^8.16.0",
-    "prisma": "^7.3.0"
+    "@types/pg": "^8.16.0"
   }
 }
