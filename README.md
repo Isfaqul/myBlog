@@ -27,7 +27,7 @@ apps/
 
 ### Frontend (User + Admin)
 
-Access [here](https://isfaq-blog.netlify.app)
+Access [here](https://blog.isfaqul.dev)
 
 - React
 - TypeScript
