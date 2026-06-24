@@ -27,7 +27,7 @@ apps/
 
 ### Frontend (User + Admin)
 
-VIEW IT LIVE [HERE](https://blog.isfaqul.dev)
+[VIEW IT LIVE HERE](https://blog.isfaqul.dev)
 
 - React
 - TypeScript
